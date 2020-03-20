@@ -8,11 +8,33 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 
-server.get('/api/resources', (req, res) => {
+server.get('/projects', (req, res) => {
+
+  db('projects')
+  .then(projects => {
+    res.status(200).json(projects);
+  })
+  .catch(error => {
+    res.status(500).json(error);
+  });
+});
+
+server.get('/resources', (req, res) => {
 
   db('resources')
-  .then(recipes => {
-    res.status(200).json(recipes);
+  .then(resources => {
+    res.status(200).json(resources);
+  })
+  .catch(error => {
+    res.status(500).json(error);
+  });
+});
+
+server.get('/tasks', (req, res) => {
+
+  db('tasks')
+  .then(tasks => {
+    res.status(200).json(tasks);
   })
   .catch(error => {
     res.status(500).json(error);
